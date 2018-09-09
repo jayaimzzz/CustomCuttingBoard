@@ -23,16 +23,16 @@ designs.blank = [
 designs.i = [
     [' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
     [' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-    [' ',' ',' ','-','-','-','-',' ',' ',' '],
-    [' ',' ',' ','A','-','-','/',' ',' ',' '],
+    [' ',' ',' ','D','-','-','U',' ',' ',' '],
+    [' ',' ',' ','d','-','-','u',' ',' ',' '],
     [' ',' ',' ',' ','-','-',' ',' ',' ',' '],
     [' ',' ',' ',' ','-','-',' ',' ',' ',' '],
     [' ',' ',' ',' ','-','-',' ',' ',' ',' '],
     [' ',' ',' ',' ','-','-',' ',' ',' ',' '],
     [' ',' ',' ',' ','-','-',' ',' ',' ',' '],
     [' ',' ',' ',' ','-','-',' ',' ',' ',' '],
-    [' ',' ',' ','/','-','-','A',' ',' ',' '],
-    [' ',' ',' ','-','-','-','-',' ',' ',' '],
+    [' ',' ',' ','u','-','-','d',' ',' ',' '],
+    [' ',' ',' ','U','-','-','D',' ',' ',' '],
     [' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
     [' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
 ]
@@ -59,23 +59,44 @@ function createBoard(){
    
 }
 
-function styleBoard(design) {
+function styleBoard(design,backgroundColor1, backgroundColor2, foregroundColor1, foregroundColor2) {
+
     for (let x = 0; x < width; x++){
         for (let y = 0; y < height; y++){
-            // console.log(designs[design][y][x])
             let cell = document.getElementById('cellAtColumn' + x + 'Row' + y)
+            let bottomImage = document.createElement('img');
+            bottomImage.className = ('cellImage')
+            let topImage = document.createElement('img');
+            topImage.className = ('cellImage + topCellImage');
+            (x + y) % 2 === 0?
+            bottomImage.setAttribute('src', 'images/' + backgroundColor1 + '01.png') +
+            topImage.setAttribute('src', 'images/' + foregroundColor1 + '01.png'):
+            bottomImage.setAttribute('src', 'images/' + backgroundColor2 + '01.png') +
+            topImage.setAttribute('src', 'images/' + foregroundColor2 + '01.png');
+            let topImageDiv = document.createElement('div');
+            topImageDiv.appendChild(topImage);
+            bottomImage.className = ('cellImage')
             switch (designs[design][y][x]){
                 case ' ':
-                cell.className = 'cell b1';
+                cell.appendChild(bottomImage);
                 break;
-                case 'A':
-                cell.className = 'cell dash';
+                case 'd':
+                // cell.appendChild(bottomImage);
+                cell.appendChild(topImageDiv);
+                cell.className = 'cell d';
                 break;
-                case '/':
-                cell.className = 'cell up';
+                case 'D':
+                cell.className = 'cell D';
+                break;
+                case 'u':
+                cell.className = 'cell u';
+                break;
+                case 'U':
+                cell.className = 'cell U';
                 break;
                 case '-':
-                cell.className = 'cell down';
+                cell.className = 'cell -';
+                cell.appendChild(topImageDiv);
                 break;
             }
         }
@@ -84,4 +105,4 @@ function styleBoard(design) {
 }
 
 createBoard();
-styleBoard("i");
+styleBoard('i','walnut', 'maple', 'cherry', 'cherry');
