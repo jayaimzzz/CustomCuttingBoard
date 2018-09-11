@@ -58,6 +58,11 @@ function createBoard() {
     }
 
 }
+function createSideBar() {
+    let sideBarDiv = document.createElement('div');
+    sideBarDiv.id = 'sideBarDiv';
+    mainWrapper.appendChild(sideBarDiv);
+}
 
 function styleBoard(design, backgroundColor1, backgroundColor2, foregroundColor1, foregroundColor2) {
 
@@ -100,4 +105,5 @@ function styleBoard(design, backgroundColor1, backgroundColor2, foregroundColor1
 }
 
 createBoard();
+createSideBar();
 styleBoard('i', 'walnut', 'maple', 'cherry', 'cherry');
